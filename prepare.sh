@@ -9,28 +9,40 @@ if [[ ! -e /etc/dpkg/dpkg.cfg.d/docker-apt-speedup ]]; then
 fi
 
 ## Enable Ubuntu Universe and Multiverse.
-sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list
-apt-get update
+sudo sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list
+sudo apt-get update
 
 ## Install things we need
-$minimal_apt_get_install wget unzip libfontconfig1 libfreetype6 libicu52 liblzo2-2 libsdl1.2debian
+sudo apt-get install -y --no-install-recommends wget unzip libfontconfig1 libfreetype6 libicu55 liblzo2-2 libsdl1.2debian
 
-## Create user
-mkdir -p /home/openttd/.openttd
-useradd -M -d /home/openttd -u 911 -U -s /bin/false openttd
-usermod -G users openttd
-chown openttd:openttd /home/openttd -R
+##need to install libicu52 manually as it’s a hard dependency for openttd
+wget -q http://launchpadlibrarian.net/201330288/libicu52_52.1-8_amd64.deb
+sudo dpkg -i libicu52_52.1-8_amd64.deb
 
 ## Download and install openttd
-wget -q http://binaries.openttd.org/releases/${OPENTTD_VERSION}/openttd-${OPENTTD_VERSION}-linux-ubuntu-trusty-amd64.deb
-dpkg -i openttd-${OPENTTD_VERSION}-linux-ubuntu-trusty-amd64.deb
-mkdir -p /etc/service/openttd/
+wget -q http://binaries.openttd.org/releases/1.6.1-RC1/openttd-1.6.1-RC1-linux-ubuntu-trusty-amd64.deb
+sudo dpkg -i openttd-1.6.1-RC1-linux-ubuntu-trusty-amd64.deb
+sudo mkdir -p /etc/service/openttd/
 
 ## Download GFX and install
-mkdir -p /usr/share/games/openttd/baseset/
+sudo mkdir -p /usr/share/games/openttd/baseset/
 cd /usr/share/games/openttd/baseset/
-#wget -q http://binaries.openttd.org/extra/opengfx/${OPENGFX_VERSION}/opengfx-${OPENGFX_VERSION}-all.zip
-wget -q http://bundles.openttdcoop.org/opengfx/releases/LATEST/opengfx-${OPENGFX_VERSION}.zip
-unzip opengfx-${OPENGFX_VERSION}.zip
-tar -xf opengfx-${OPENGFX_VERSION}.tar
-rm -rf opengfx-*.tar opengfx-*.zip
+sudo wget -q http://bundles.openttdcoop.org/opengfx/releases/LATEST/opengfx-0.5.4.zip
+sudo unzip opengfx-0.5.4.zip
+sudo tar -xf opengfx-0.5.4.tar
+sudo rm -rf opengfx-*.tar opengfx-*.zip
+
+
+## Create openttd folders and download required files off the CDN
+cd ~
+mkdir .openttd
+
+wget -q https://webttd-resources.azureedge.net/content_download.tar
+mkdir .openttd/content_download
+tar -xf content_download.tar -C .openttd/content_download
+
+wget -q https://webttd-resources.azureedge.net/scripts.tar
+mkdir .openttd/scripts
+tar -xf scripts.tar -C .openttd/scripts
+
+wget -q https://webttd-resources.azureedge.net/UK_2.sav
