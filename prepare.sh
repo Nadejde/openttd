@@ -13,11 +13,11 @@ sudo sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list
 sudo apt-get update
 
 ## Install things we need
-sudo apt-get install -y --no-install-recommends wget unzip libfontconfig1 libfreetype6 libicu55 liblzo2-2 libsdl1.2debian
+sudo apt-get install -y --no-install-recommends wget unzip libfontconfig1 libfreetype6 libicu52 liblzo2-2 libsdl1.2debian
 
 ##need to install libicu52 manually as it’s a hard dependency for openttd
-wget -q http://launchpadlibrarian.net/201330288/libicu52_52.1-8_amd64.deb
-sudo dpkg -i libicu52_52.1-8_amd64.deb
+#wget -q http://launchpadlibrarian.net/201330288/libicu52_52.1-8_amd64.deb
+#sudo dpkg -i libicu52_52.1-8_amd64.deb
 
 ## Download and install openttd
 wget -q http://binaries.openttd.org/releases/1.6.1-RC1/openttd-1.6.1-RC1-linux-ubuntu-trusty-amd64.deb
