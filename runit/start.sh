@@ -1,3 +1,3 @@
 ## Run server as root
-cd ~
-/usr/games/openttd -D -f -g UK_2.sav
+exec /sbin/setuser openttd /usr/games/openttd -D -f -g UK_2.sav
+

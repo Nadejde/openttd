@@ -13,6 +13,8 @@ RUN /tmp/prepare.sh && \
     /tmp/system_services.sh && \
     /tmp/cleanup.sh
 
+VOLUME /home/openttd/.openttd
+
 EXPOSE 3001/tcp
 EXPOSE 3001/udp
 EXPOSE 6001/tcp
