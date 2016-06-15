@@ -3,7 +3,7 @@
 # Based on phusion:baseimage (from ubuntu)
 ############################################################
 FROM phusion/baseimage:latest
-MAINTAINER Mats Bergmann <bateau@sea-shell.org>
+MAINTAINER Anrdrei Nadejde <andrei.nadejde@gmail.com>
 
 ARG OPENTTD_VERSION="1.6.1-RC1"
 ARG OPENGFX_VERSION="0.5.4"
