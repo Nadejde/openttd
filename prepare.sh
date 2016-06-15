@@ -23,21 +23,20 @@ chown openttd:openttd /home/openttd -R
 
 ## Download and install openttd
 wget -q http://binaries.openttd.org/releases/${OPENTTD_VERSION}/openttd-${OPENTTD_VERSION}-linux-ubuntu-trusty-amd64.deb
-sudo dpkg -i openttd-${OPENTTD_VERSION}-linux-ubuntu-trusty-amd64.deb
-sudo mkdir -p /etc/service/openttd/
+dpkg -i openttd-${OPENTTD_VERSION}-linux-ubuntu-trusty-amd64.deb
+mkdir -p /etc/service/openttd/
 
 ## Download GFX and install
-sudo mkdir -p /usr/share/games/openttd/baseset/
+mkdir -p /usr/share/games/openttd/baseset/
 cd /usr/share/games/openttd/baseset/
-sudo wget -q http://bundles.openttdcoop.org/opengfx/releases/LATEST/opengfx-${OPENGFX_VERSION}.zip
-sudo unzip opengfx-${OPENGFX_VERSION}.zip
-sudo tar -xf opengfx-${OPENGFX_VERSION}.tar
-sudo rm -rf opengfx-*.tar opengfx-*.zip
+wget -q http://bundles.openttdcoop.org/opengfx/releases/LATEST/opengfx-${OPENGFX_VERSION}.zip
+unzip opengfx-${OPENGFX_VERSION}.zip
+tar -xf opengfx-${OPENGFX_VERSION}.tar
+rm -rf opengfx-*.tar opengfx-*.zip
 
 
 ## Create openttd folders and download required files off the CDN
 cd /home/openttd
-mkdir .openttd
 
 wget -q https://webttd-resources.azureedge.net/content_download.tar
 mkdir .openttd/content_download
